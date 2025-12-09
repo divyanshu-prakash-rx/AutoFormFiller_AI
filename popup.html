@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoFormFiller AI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>🤖 AutoFormFiller AI</h1>
+      <p class="subtitle">Intelligent form filling powered by RAG</p>
+    </header>
+
+    <!-- Backend Server Alert -->
+    <div id="backendAlert" class="backend-alert" style="display: none;">
+      <div class="alert-content">
+        <span class="alert-icon">⚠️</span>
+        <div class="alert-message">
+          <strong>Backend Server Not Running</strong>
+          <p>Start the server to use AutoFormFiller</p>
+        </div>
+      </div>
+      <div class="alert-actions">
+        <button class="btn btn-sm" id="copyStartCmd">📋 Copy Command</button>
+        <button class="btn btn-sm btn-primary" id="openTerminalHelp">📖 Show Instructions</button>
+      </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <div class="status-item">
+        <span class="status-label">Backend:</span>
+        <span id="backendStatus" class="status-value status-checking">Checking...</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Auto Fill:</span>
+        <label class="switch">
+          <input type="checkbox" id="autoFillToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="status-item">
+        <span class="status-label">LLM:</span>
+        <span id="llmStatus" class="status-value">Checking...</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">Vector DB:</span>
+        <span id="vectorDbStatus" class="status-value">Unknown</span>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-button active" data-tab="files">📁 Files</button>
+      <button class="tab-button" data-tab="query">💬 Query</button>
+      <button class="tab-button" data-tab="settings">⚙️ Settings</button>
+    </div>
+
+    <!-- Files Tab -->
+    <div class="tab-content active" id="filesTab">
+      <div class="section">
+        <h3>Knowledge Base Files</h3>
+        <div class="file-upload">
+          <input type="file" id="fileInput" accept=".pdf,.txt,.docx" multiple style="display: none;">
+          <button class="btn btn-primary" id="uploadBtn">
+            📤 Upload Files
+          </button>
+          <span class="hint">PDF, TXT, DOCX (Max 10MB)</span>
+        </div>
+        
+        <div class="file-list" id="fileList">
+          <div class="loading">Loading files...</div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn-success" id="updateVectorDbBtn">
+            🔄 Update Vector Database
+          </button>
+          <button class="btn btn-secondary" id="refreshFilesBtn">
+            ↻ Refresh List
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Query Tab -->
+    <div class="tab-content" id="queryTab">
+      <div class="section">
+        <h3>Manual Query</h3>
+        <p class="hint">Test your knowledge base with custom queries</p>
+        
+        <div class="query-form">
+          <input 
+            type="text" 
+            id="queryInput" 
+            placeholder="e.g., What is my email address?"
+            class="input-field"
+          >
+          <input 
+            type="text" 
+            id="fieldContextInput" 
+            placeholder="Field context (optional, e.g., 'Email field')"
+            class="input-field"
+          >
+          <button class="btn btn-primary" id="queryBtn">
+            🔍 Get Answer
+          </button>
+        </div>
+
+        <div class="output-panel" id="outputPanel">
+          <h4>Output:</h4>
+          <div id="queryResult" class="result-box">
+            Enter a query to see results...
+          </div>
+          <div id="queryMeta" class="meta-info"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div class="tab-content" id="settingsTab">
+      <div class="section">
+        <h3>Extension Settings</h3>
+        
+        <div class="setting-item">
+          <label for="backendUrl">Backend URL:</label>
+          <input 
+            type="text" 
+            id="backendUrl" 
+            class="input-field"
+            value="http://localhost:3000"
+          >
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="showNotifications">
+            Show notifications
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <label>
+            <input type="checkbox" id="preferLocalLlm" checked>
+            Prefer local Llama (if available)
+          </label>
+        </div>
+
+        <button class="btn btn-primary" id="saveSettingsBtn">
+          💾 Save Settings
+        </button>
+
+        <div class="setting-item" style="margin-top: 20px;">
+          <h4>Rejected Fields</h4>
+          <p style="font-size: 12px; color: #666;">
+            Fields you've rejected won't show suggestions again
+          </p>
+          <button class="btn btn-secondary" id="clearRejectedBtn">
+            🗑️ Clear All Rejected Fields
+          </button>
+        </div>
+
+        <div class="info-box">
+          <h4>About</h4>
+          <p><strong>Version:</strong> 1.0.0</p>
+          <p><strong>LLM:</strong> Local Llama 3.1:7B</p>
+          <p><strong>Embeddings:</strong> sentence-transformers (local)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div id="statusMessage" class="status-message"></div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

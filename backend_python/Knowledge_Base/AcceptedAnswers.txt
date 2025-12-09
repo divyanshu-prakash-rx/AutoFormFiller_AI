@@ -1,0 +1,182 @@
+
+============================================================
+Field: Name​Name is required.
+Answer: Divyanshu Prakash
+Date: 2025-12-08T17:09:20.049Z
+===========================================================
+
+============================================================
+Field: Search
+Answer: bhilai
+Date: 2025-12-08T17:21:14.244Z
+============================================================
+
+============================================================
+Field: Website (Examples: Linkedin, Github, portfolio)​Website link must be valid.
+Answer: https://github.com/divyanshu-prakash-rx , https://www.linkedin.com/in/divyanshu-prakash-rx/ ,  https://divyanshu-prakash.onrender.com/
+Date: 2025-12-08T17:30:43.491Z
+============================================================
+
+============================================================
+Field: Search
+Answer: Bhilai
+Date: 2025-12-08T17:33:56.272Z
+============================================================
+
+============================================================
+Field: Email address​Email must be valid.
+Answer: me
+Date: 2025-12-08T17:34:03.998Z
+============================================================
+
+============================================================
+Field: Website (Examples: Linkedin, Github, portfolio)
+Answer: https://www.linkedin.com/in/divyanshu-prakash-rx/
+Date: 2025-12-08T17:34:28.312Z
+============================================================
+
+============================================================
+Field: Password
+Answer: #@!**?Divyanshu---1
+Date: 2025-12-08T17:34:40.829Z
+============================================================
+
+============================================================
+Field: Confirm password
+Answer: #@!**?Divyanshu---1
+Date: 2025-12-08T17:34:43.462Z
+============================================================
+
+============================================================
+Field: Search
+Answer: Indian Institute of Technology Bhilai
+Date: 2025-12-08T17:35:25.452Z
+============================================================
+
+============================================================
+Field: Concentration
+Answer: Mechatronics Engineering
+Date: 2025-12-08T17:35:44.286Z
+============================================================
+
+============================================================
+Field: Concentration
+Answer: Com
+Date: 2025-12-08T17:35:52.521Z
+============================================================
+
+============================================================
+Field: Concentration
+Answer: Computer Science Engineering
+Date: 2025-12-08T17:35:59.885Z
+============================================================
+
+============================================================
+Field: Search
+Answer: Assurant
+Date: 2025-12-08T17:36:31.046Z
+============================================================
+
+============================================================
+Field: Search
+Answer: AI & Data Science Intern
+Date: 2025-12-08T17:36:47.741Z
+============================================================
+
+============================================================
+Field: Location
+Answer: remote
+Date: 2025-12-08T17:36:57.471Z
+============================================================
+
+============================================================
+Field: Location
+Answer: Remote, OR, US
+Date: 2025-12-08T17:36:58.938Z
+============================================================
+
+============================================================
+Field: Start (MM/YYYY)​Date must be in a valid format (MM/YYYY)
+Answer: 20/25
+Date: 2025-12-08T17:37:06.775Z
+============================================================
+
+============================================================
+Field: End (MM/YYYY)​Date must be in a valid format (MM/YYYY)
+Answer: 07/25
+Date: 2025-12-08T17:37:21.963Z
+============================================================
+
+============================================================
+Field: Start (MM/YYYY)​Date must be in a valid format (MM/YYYY)
+Answer: 05/25
+Date: 2025-12-08T17:37:33.347Z
+============================================================
+
+============================================================
+Field: End (MM/YYYY)
+Answer: 07/2025
+Date: 2025-12-08T17:37:41.785Z
+============================================================
+
+============================================================
+Field: Start (MM/YYYY)
+Answer: 05/2025
+Date: 2025-12-08T17:37:48.474Z
+============================================================
+
+============================================================
+Field: DescriptionDescription of the work i did :
+Answer: Description of the work i did :
+Date: 2025-12-08T17:38:18.558Z
+============================================================
+
+============================================================
+Field: Description• Built digital twin simulation system using Omniverse Kit and Python for workflow replication.
+• Architected dynamic flows with OmniGraph, USD, CSV ingestion, and backend parameter updates.
+• Implemented AI-driven predictive modeling on Issac-sim and decision support for real-time simulation accuracy.
+• Collaborated cross-functionally to align simulation architecture with business analytics and requirements.
+Answer: • Built digital twin simulation system using Omniverse Kit and Python for workflow replication.
+• Architected dynamic flows with OmniGraph, USD, CSV ingestion, and backend parameter updates.
+• Implemented AI-driven predictive modeling on Issac-sim and decision support for real-time simulation accuracy.
+• Collaborated cross-functionally to align simulation architecture with business analytics and requirements.
+Date: 2025-12-08T17:39:02.490Z
+============================================================
+
+============================================================
+Field: Skills (optional)
+Answer: Data Structures & Algorithms, Machine Learning, Deep Learning, OOP, Web Development (React.js, Node.js), Programming Languages (C++, Python, C, JavaScript)
+Date: 2025-12-08T17:39:17.813Z
+============================================================
+
+============================================================
+Field: Employer
+Answer: Assurant (for internship) and IBITF IIT Bhilai (for AI/ML Internship)
+Date: 2025-12-08T19:05:12.361Z
+============================================================
+
+============================================================
+Field: Job Title
+Answer: AI & Data Science Intern
+Date: 2025-12-08T19:05:34.080Z
+============================================================
+
+============================================================
+Field: Institution   . Required
+User Typed (Hint): Indian Institute Of Technology IIT
+Answer: Indian Institute of Technology Bhilai
+Date: 2025-12-08T19:07:31.768Z
+============================================================
+
+============================================================
+Field: Field(s) of Study
+User Typed (Hint): MECHATRONICS ENGINEERING
+Answer: Mechatronics Engg. (Computer Science Engg)
+Date: 2025-12-08T19:07:57.462Z
+============================================================
+
+============================================================
+Field: Please enter your full name:   . Required
+Answer: Divyanshu Prakash
+Date: 2025-12-08T19:09:48.857Z
+============================================================
