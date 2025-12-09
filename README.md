@@ -1,6 +1,6 @@
 # AutoFormFiller AI
 
-A Chrome extension that fills out forms using your own documents. Upload your resume, cover letters, or any PDFs, and the extension suggests answers based on what's in your files.
+A Chrome extension that fills out forms using your own documents using RAG and Local LLM. Upload your resume, cover letters, or any PDFs, and the extension suggests answers based on what's in your files.
 
 ## Features
 
