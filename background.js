@@ -1,21 +1,34 @@
-// Background service worker for AutoFormFiller extension
+// ============================================================================
+// AutoFormFiller - Background Service Worker
+// Handles extension lifecycle and backend communication
+// ============================================================================
+
+// ============================================================================
+// CONFIGURATION
+// ============================================================================
+
+const CONFIG = {
+  BACKEND_URL: 'http://localhost:3000',
+  HEALTH_CHECK_TIMEOUT: 5000  // ms
+};
+
+const DEFAULT_SETTINGS = {
+  autoFillEnabled: false,
+  backendUrl: CONFIG.BACKEND_URL,
+  showNotifications: true,
+  preferLocalLlm: true
+};
+
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
 
 console.log('AutoFormFiller: Background service worker initialized');
 
-// Listen for extension installation
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
     console.log('AutoFormFiller: Extension installed');
-    
-    // Set default settings
-    chrome.storage.local.set({
-      settings: {
-        autoFillEnabled: false,
-        backendUrl: 'http://localhost:3000',
-        showNotifications: true,
-        preferLocalLlm: true
-      }
-    });
+    chrome.storage.local.set({ settings: DEFAULT_SETTINGS });
   }
 });
 
@@ -40,16 +53,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-// Handle query requests
+// ============================================================================
+// HANDLERS
+// ============================================================================
+
 async function handleQuery(data) {
   const settings = await chrome.storage.local.get(['settings']);
-  const backendUrl = settings.settings?.backendUrl || 'http://localhost:3000';
+  const backendUrl = settings.settings?.backendUrl || CONFIG.BACKEND_URL;
   
   const response = await fetch(`${backendUrl}/api/query`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   });
   
@@ -60,14 +74,12 @@ async function handleQuery(data) {
   return await response.json();
 }
 
-// Check backend health
 async function checkBackendHealth(backendUrl) {
   try {
     const response = await fetch(`${backendUrl}/health`, {
       method: 'GET',
-      signal: AbortSignal.timeout(5000) // 5 second timeout
+      signal: AbortSignal.timeout(CONFIG.HEALTH_CHECK_TIMEOUT)
     });
-    
     return response.ok;
   } catch (error) {
     console.error('Backend health check failed:', error);

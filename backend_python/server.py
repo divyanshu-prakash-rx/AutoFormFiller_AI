@@ -1,7 +1,11 @@
 """
 AutoFormFiller - Python RAG Backend Server
-Uses sentence-transformers for embeddings (same as your Implementation.ipynb)
 """
+
+
+# ============================================================================
+# IMPORTS
+# ============================================================================
 
 import os
 import json
@@ -14,57 +18,71 @@ import PyPDF2
 from docx import Document
 import pickle
 from datetime import datetime
+import warnings
+warnings.filterwarnings('ignore')
 
-# Import torch first
+# ============================================================================
+# CONFIGURATION
+# ============================================================================
+
+# Server Configuration
+SERVER_HOST = '0.0.0.0'
+SERVER_PORT = 3000
+
+# Paths
+KNOWLEDGE_BASE_PATH = Path("Knowledge_Base") if 'Path' in dir() else None
+VECTOR_DB_PATH = Path("vector_db") if 'Path' in dir() else None
+
+# Model Configuration
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+OLLAMA_MODEL = "llama3.1:8b"
+LLM_TEMPERATURE = 0.3
+LLM_MAX_TOKENS = 100
+
+# RAG Configuration
+CHUNK_SIZE = 1000
+CHUNK_OVERLAP = 200
+TOP_K = 3
+
+# Path configuration (after imports)
+KNOWLEDGE_BASE_PATH = Path("Knowledge_Base")
+VECTOR_DB_PATH = Path("vector_db")
+
+
+
+# ============================================================================
+# DEPENDENCY CHECKS
+# ============================================================================
+
 try:
     import torch
     print("✓ PyTorch loaded")
 except ImportError:
     print("Warning: PyTorch not found")
 
-# Try importing sentence_transformers
 SENTENCE_TRANSFORMERS_AVAILABLE = False
 try:
-    # Avoid sklearn import issues
-    import warnings
-    warnings.filterwarnings('ignore')
     from sentence_transformers import SentenceTransformer
     SENTENCE_TRANSFORMERS_AVAILABLE = True
     print("✓ sentence-transformers loaded")
 except Exception as e:
     print(f"Warning: sentence-transformers not available: {e}")
-    print("Will use fallback embedding method")
 
-# Try importing ollama
 OLLAMA_AVAILABLE = False
 try:
     import ollama
     OLLAMA_AVAILABLE = True
     print("✓ ollama loaded")
 except ImportError:
-    print("Warning: ollama not available, will install...")
-    import subprocess
-    try:
-        subprocess.run(["pip", "install", "ollama"], check=True)
-        import ollama
-        OLLAMA_AVAILABLE = True
-        print("✓ ollama installed successfully")
-    except Exception as e:
-        print(f"Failed to install ollama: {e}")
+    print("Warning: ollama not available")
 
-# Configuration
-KNOWLEDGE_BASE_PATH = Path("Knowledge_Base")
-VECTOR_DB_PATH = Path("vector_db")
-EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"  # Fast and good
-CHUNK_SIZE = 1000
-CHUNK_OVERLAP = 200
-TOP_K = 3
+# ============================================================================
+# INITIALIZATION
+# ============================================================================
 
-# Initialize Flask app
 app = Flask(__name__)
 CORS(app)
 
-# Global variables
 encoder = None
 documents = []
 embeddings = None
@@ -429,9 +447,9 @@ Instructions:
 Answer:"""
             
             response = ollama.generate(
-                model='llama3.1:8b',
+                model=OLLAMA_MODEL,
                 prompt=prompt,
-                options={'temperature': 0.3, 'num_predict': 100}
+                options={'temperature': LLM_TEMPERATURE, 'num_predict': LLM_MAX_TOKENS}
             )
             
             answer = response['response'].strip()
@@ -744,9 +762,10 @@ if __name__ == '__main__':
     load_vector_db_cache()
     
     # Start server
-    print(f"\n🚀 Server starting on http://localhost:3000")
+    print(f"\n🚀 Server starting on http://localhost:{SERVER_PORT}")
     print(f"📁 Knowledge Base: {KNOWLEDGE_BASE_PATH.absolute()}")
-    print(f"🧠 Using model: {EMBEDDING_MODEL}")
+    print(f"🧠 Embedding Model: {EMBEDDING_MODEL}")
+    print(f"🤖 LLM Model: {OLLAMA_MODEL}")
     print("\n")
     
-    app.run(host='0.0.0.0', port=3000, debug=False)
+    app.run(host=SERVER_HOST, port=SERVER_PORT, debug=False)

@@ -1,10 +1,27 @@
-// Content script - runs on all web pages to detect and assist with form filling
+// ============================================================================
+// AutoFormFiller - Content Script
+// Detects form fields and provides AI-powered suggestions
+// ============================================================================
+
+// ============================================================================
+// CONFIGURATION
+// ============================================================================
+
+const CONFIG = {
+  TYPING_DELAY: 300,           // ms to wait after user stops typing
+  NOTIFICATION_DURATION: 2000, // ms to show notifications
+  SUGGESTION_OFFSET: 5         // px offset below form field
+};
+
+// ============================================================================
+// STATE
+// ============================================================================
 
 let autoFillEnabled = false;
 let currentField = null;
 let suggestionPopup = null;
 let settings = {};
-let rejectedFields = new Set(); // Track rejected fields by unique identifier
+let rejectedFields = new Set();
 
 // Initialize
 async function init() {
@@ -241,7 +258,7 @@ async function handleFieldFocus(event) {
       const contentEl = document.getElementById('autoformfiller-content');
       contentEl.innerHTML = '<span style="color: #999;">🔄 Updating...</span>';
       
-      // Wait 300ms after user stops typing
+      // Wait after user stops typing
       typingTimeout = setTimeout(() => {
         const newPartialInput = e.target.value.trim();
         const fieldContext = getFieldContext(e.target);
@@ -249,7 +266,7 @@ async function handleFieldFocus(event) {
         
         // Update suggestion with new partial input
         fetchSuggestion(query, fieldContext, newPartialInput);
-      }, 300);
+      }, CONFIG.TYPING_DELAY);
     });
   }
 }
@@ -353,7 +370,7 @@ function showSuggestionPopup(field) {
   const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
   
   suggestionPopup.style.display = 'block';
-  suggestionPopup.style.top = `${rect.bottom + scrollTop + 5}px`;
+  suggestionPopup.style.top = `${rect.bottom + scrollTop + CONFIG.SUGGESTION_OFFSET}px`;
   suggestionPopup.style.left = `${rect.left + scrollLeft}px`;
   
   // Reset content
@@ -487,7 +504,7 @@ function showNotification(message, type = 'info') {
   
   setTimeout(() => {
     notification.remove();
-  }, 2000);
+  }, CONFIG.NOTIFICATION_DURATION);
 }
 
 // Escape HTML to prevent XSS

@@ -1,11 +1,30 @@
-// Popup script for AutoFormFiller extension
+// ============================================================================
+// AutoFormFiller - Popup Script
+// Extension popup interface and controls
+// ============================================================================
 
-let settings = {
+// ============================================================================
+// CONFIGURATION
+// ============================================================================
+
+const CONFIG = {
+  BACKEND_URL: 'http://localhost:3000',
+  STATUS_MESSAGE_DURATION: 3000,  // ms
+  HEALTH_CHECK_TIMEOUT: 3000      // ms
+};
+
+const DEFAULT_SETTINGS = {
   autoFillEnabled: false,
-  backendUrl: 'http://localhost:3000',
+  backendUrl: CONFIG.BACKEND_URL,
   showNotifications: true,
   preferLocalLlm: true
 };
+
+// ============================================================================
+// STATE
+// ============================================================================
+
+let settings = { ...DEFAULT_SETTINGS };
 
 // Load settings on startup
 async function loadSettings() {
@@ -39,7 +58,7 @@ function showStatus(message, type = 'info') {
   setTimeout(() => {
     statusEl.textContent = '';
     statusEl.className = 'status-message';
-  }, 3000);
+  }, CONFIG.STATUS_MESSAGE_DURATION);
 }
 
 // Check LLM status
@@ -74,7 +93,7 @@ async function checkBackendStatus() {
   try {
     const response = await fetch(`${settings.backendUrl}/health`, {
       method: 'GET',
-      signal: AbortSignal.timeout(3000)
+      signal: AbortSignal.timeout(CONFIG.HEALTH_CHECK_TIMEOUT)
     });
     
     if (response.ok) {
