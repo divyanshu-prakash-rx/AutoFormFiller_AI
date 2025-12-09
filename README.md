@@ -19,6 +19,10 @@ A Chrome extension that fills out forms using your own documents. Upload your re
 
 **Quick Start:**
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/d6d45c8c-41a0-4619-a202-2a58ed8bb9f2" alt="Image 1" width="467" style="border: 2px solid #ddd; border-radius: 8px;"/>
+</div>
+
 1. Run the setup script (installs Ollama and Python dependencies):
    ```powershell
    .\setup.ps1
@@ -33,10 +37,19 @@ A Chrome extension that fills out forms using your own documents. Upload your re
    python server.py
    ```
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/95fd0fbf-6ce8-46f0-ae1a-03ac8bdf61a7" alt="Image 2" width="1142" style="border: 2px solid #ddd; border-radius: 8px;"/>
+</div>
+
+
 3. Load the extension in Chrome:
    - Go to `chrome://extensions/`
    - Enable Developer mode
    - Click "Load unpacked" and select this folder
+     
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/46183d5f-5005-4732-a087-c5a08a91e936" alt="Image 3" width="458" style="border: 2px solid #fff; border-radius: 8px;"/>
+</div>
 
 That's it. The server runs on `localhost:3000` and needs to stay open while using the extension.
 
