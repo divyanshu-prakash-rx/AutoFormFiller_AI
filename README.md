@@ -8,7 +8,6 @@ A Chrome extension that fills out forms using your own documents. Upload your re
 - Local LLM (Llama 3.1:8b via Ollama) - no API costs
 - Upload PDFs, TXT, or DOCX files as knowledge base
 - Privacy-focused: everything runs locally
-- Reject suggestions for specific fields
 - Real-time suggestion updates as you type
 
 ## Setup
